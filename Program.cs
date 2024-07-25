@@ -1,12 +1,45 @@
 ﻿using CookiesCookBookLectureSolution.Recipes;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+
+const FileFormat Format = FileFormat.JSON;
+IStringsRepository stringsRepository;
+if (Format == FileFormat.JSON) {
+    stringsRepository = new StringsJSONRepository();
+} else if (Format == FileFormat.txt) {
+    stringsRepository = new StringsTextualRepository();
+}
+
+const string Filename = "recipes";
+string filePath;
+if (Format == FileFormat.JSON) {
+    filePath = Filename + "json";
+} else if (Format == FileFormat.txt) {
+    filePath= Filename + "text";
+}
 
 var ingredientsRegister = new IngredientsRegister();
 
-var cookiesRecipesApp = new CookiesRecipesApp(new RecipesRepository(new StringsTextualRepository(), ingredientsRegister), 
+var cookiesRecipesApp = new CookiesRecipesApp(new RecipesRepository(stringsRepository, ingredientsRegister), 
     new RecipesConsoleUserInteraction(ingredientsRegister));
-cookiesRecipesApp.Run("recipes.txt");
+cookiesRecipesApp.Run(filePath);
+
+public class FileMetaData {
+    public string Name { get; }
+    public FileFormat Format { get; }
+    public FileMetaData(string name, FileFormat format)
+    {
+        this.Name = name;
+        this.Format = format;
+    }
+
+}
+
+public enum FileFormat {
+    JSON,
+    txt
+}
 
 public class CookiesRecipesApp {
 
@@ -58,17 +91,16 @@ public class StringsTextualRepository : IStringsRepository {
 }
 
 public class StringsJSONRepository : IStringsRepository {
-    private static readonly string Separator = Environment.NewLine;
 
     public List<string> Read(string filePath) {
         if (File.Exists(filePath)) {
             var fileContents = File.ReadAllText(filePath);
-            return fileContents.Split(Separator).ToList();
+            return JsonSerializer.Deserialize<List<string>>(fileContents);
         }
         return new List<string>();
     }
 
     public void Write(string filePath, List<string> strings) {
-        File.WriteAllText(filePath, string.Join(Separator, strings));
+        File.WriteAllText(filePath, JsonSerializer.Serialize(strings));
     }
 }
