@@ -1,0 +1,14 @@
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\bin\Debug\net8.0\CookiesCookBookLectureSolution.exe
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\bin\Debug\net8.0\CookiesCookBookLectureSolution.deps.json
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\bin\Debug\net8.0\CookiesCookBookLectureSolution.runtimeconfig.json
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\bin\Debug\net8.0\CookiesCookBookLectureSolution.dll
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\bin\Debug\net8.0\CookiesCookBookLectureSolution.pdb
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\CookiesCookBookLectureSolution.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\CookiesCookBookLectureSolution.AssemblyInfoInputs.cache
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\CookiesCookBookLectureSolution.AssemblyInfo.cs
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\CookiesCookBookLectureSolution.csproj.CoreCompileInputs.cache
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\CookiesCookBookLectureSolution.dll
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\refint\CookiesCookBookLectureSolution.dll
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\CookiesCookBookLectureSolution.pdb
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\CookiesCookBookLectureSolution.genruntimeconfig.cache
+C:\Users\kory2\source\repos\CsharpMasterClassProjects\CookiesCookBookLectureSolution\obj\Debug\net8.0\ref\CookiesCookBookLectureSolution.dll
