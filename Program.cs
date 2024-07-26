@@ -3,7 +3,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-const FileFormat Format = FileFormat.JSON;
+const FileFormat Format = FileFormat.txt;
 IStringsRepository stringsRepository;
 if (Format == FileFormat.JSON) {
     stringsRepository = new StringsJSONRepository();
@@ -12,18 +12,14 @@ if (Format == FileFormat.JSON) {
 }
 
 const string Filename = "recipes";
-string filePath;
-if (Format == FileFormat.JSON) {
-    filePath = Filename + "json";
-} else if (Format == FileFormat.txt) {
-    filePath= Filename + "text";
-}
+var fileMetaData = new FileMetaData(Filename, Format);
+
 
 var ingredientsRegister = new IngredientsRegister();
 
 var cookiesRecipesApp = new CookiesRecipesApp(new RecipesRepository(stringsRepository, ingredientsRegister), 
     new RecipesConsoleUserInteraction(ingredientsRegister));
-cookiesRecipesApp.Run(filePath);
+cookiesRecipesApp.Run(fileMetaData.ToPath());
 
 public class FileMetaData {
     public string Name { get; }
@@ -34,6 +30,20 @@ public class FileMetaData {
         this.Format = format;
     }
 
+    public string ToPath() {
+
+        return $"{Name}.{Format.AsFileExtension()}";
+    }
+}
+
+public static class FileFormatExtensions {
+    public static string AsFileExtension(this FileFormat fileformat) {
+        if (fileformat == FileFormat.JSON) {
+            return "json";
+        } else if (fileformat == FileFormat.txt) {
+            return "txt";
+        } else return "";
+    }
 }
 
 public enum FileFormat {
@@ -74,33 +84,46 @@ public class CookiesRecipesApp {
 }
 
 
-public class StringsTextualRepository : IStringsRepository {
-    private static readonly string Separator = Environment.NewLine;
+public abstract class StringsRepository : IStringsRepository {
 
     public List<string> Read(string filePath) {
         if (File.Exists(filePath)) {
             var fileContents = File.ReadAllText(filePath);
-            return fileContents.Split(Separator).ToList();
+            return TextToStrings(fileContents);
         }
         return new List<string>();
     }
 
+    protected abstract List<string> TextToStrings(string fileContents);
+
     public void Write(string filePath, List<string> strings) {
-        File.WriteAllText(filePath, string.Join(Separator, strings));
+        File.WriteAllText(filePath, StringsToText(strings));
+    }
+
+    protected abstract string StringsToText(List<string> strings);
+}
+
+
+
+public class StringsTextualRepository : StringsRepository {
+    private static readonly string Separator = Environment.NewLine;
+
+    protected override string StringsToText(List<string> strings) {
+        return string.Join(Separator, strings);
+    }
+
+    protected override List<string> TextToStrings(string fileContents) {
+        return fileContents.Split(Separator).ToList();
     }
 }
 
-public class StringsJSONRepository : IStringsRepository {
+public class StringsJSONRepository : StringsRepository {
 
-    public List<string> Read(string filePath) {
-        if (File.Exists(filePath)) {
-            var fileContents = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<string>>(fileContents);
-        }
-        return new List<string>();
+    protected override string StringsToText(List<string> strings) {
+        return JsonSerializer.Serialize(strings);
     }
 
-    public void Write(string filePath, List<string> strings) {
-        File.WriteAllText(filePath, JsonSerializer.Serialize(strings));
+    protected override List<string> TextToStrings(string fileContents) {
+        return JsonSerializer.Deserialize<List<string>>(fileContents);
     }
 }

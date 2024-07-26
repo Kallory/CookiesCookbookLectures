@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CookiesCookBookLectureSolution")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb8451d8a8b49076f36d39ba53235919be503434")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dcbff04a9e7f8aa8e95911cab856106f4d2bd5f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("CookiesCookBookLectureSolution")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CookiesCookBookLectureSolution")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
